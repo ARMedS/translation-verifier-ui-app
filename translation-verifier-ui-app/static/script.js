@@ -70,11 +70,69 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 data.markers.forEach((marker, index) => {
                     const li = document.createElement('li');
-                    li.textContent = `Problem ${index + 1}: English: "${marker.english_marker}" | Vietnamese: "${marker.vietnamese_marker}"`;
-                    li.addEventListener('click', () => {
+                    li.className = 'problem-item';
+                    li.setAttribute('data-expanded', 'false');
+                    
+                    // Create the main problem text
+                    const problemText = document.createElement('div');
+                    problemText.className = 'problem-text';
+                    problemText.textContent = `Problem ${index + 1}: English: "${marker.english_marker}" | Vietnamese: "${marker.vietnamese_marker}"`;
+                    
+                    // Create the explanation text
+                    const explanationText = document.createElement('div');
+                    explanationText.className = 'explanation-text';
+                    explanationText.textContent = `Reason: ${marker.explanation || 'No explanation provided'}`;
+                    
+                    // Create the detailed explanation container (initially hidden)
+                    const detailedContainer = document.createElement('div');
+                    detailedContainer.className = 'detailed-explanation-container';
+                    detailedContainer.style.display = 'none';
+                    
+                    const detailedText = document.createElement('div');
+                    detailedText.className = 'detailed-explanation-text';
+                    detailedText.textContent = marker.detailed_explanation || 'No detailed explanation provided';
+                    
+                    detailedContainer.appendChild(detailedText);
+                    
+                    // Create expand/collapse indicator
+                    const expandIndicator = document.createElement('span');
+                    expandIndicator.className = 'expand-indicator';
+                    expandIndicator.textContent = '▼';
+                    
+                    // Add click functionality to toggle expansion and highlight text
+                    const toggleAndHighlight = () => {
+                        const isExpanded = li.getAttribute('data-expanded') === 'true';
+                        
+                        if (isExpanded) {
+                            // Collapse
+                            detailedContainer.style.display = 'none';
+                            expandIndicator.textContent = '▼';
+                            li.setAttribute('data-expanded', 'false');
+                        } else {
+                            // Expand
+                            detailedContainer.style.display = 'block';
+                            expandIndicator.textContent = '▲';
+                            li.setAttribute('data-expanded', 'true');
+                        }
+                        
+                        // Always highlight the text when clicked
                         highlightAndScroll('english-text-display', originalEnglishText, marker.english_marker, `en-marker-${index}`);
                         highlightAndScroll('vietnamese-text-display', originalVietnameseText, marker.vietnamese_marker, `vi-marker-${index}`);
+                    };
+                    
+                    // Add click functionality to all clickable elements
+                    problemText.addEventListener('click', toggleAndHighlight);
+                    explanationText.addEventListener('click', toggleAndHighlight);
+                    detailedContainer.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent toggling when clicking inside detailed explanation
                     });
+                    
+                    // Add expand indicator to the problem text
+                    problemText.appendChild(expandIndicator);
+                    
+                    li.appendChild(problemText);
+                    li.appendChild(explanationText);
+                    li.appendChild(detailedContainer);
                     problemsList.appendChild(li);
                 });
             }
