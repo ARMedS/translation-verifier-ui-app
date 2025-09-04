@@ -1,0 +1,57 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tran-Scribe Verifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Translation Verifier UI App</h1>
+        <label for="api_key">OpenRouter API Key:</label>
+        <input type="text" id="api_key" placeholder="Enter your OpenRouter API Key">
+    </header>
+
+    <section id="input-section">
+        <label for="model">Select Model:</label>
+        <select id="model">
+            <option value="google/gemini-2.5-pro">Google Gemini 2.5 Pro (1M+ context, advanced reasoning)</option>
+            <option value="google/gemini-2.5-flash">Google Gemini 2.5 Flash (1M+ context, fast reasoning)</option>
+            <option value="anthropic/claude-sonnet-4">Anthropic Claude Sonnet 4 (1M context, coding/reasoning)</option>
+            <option value="openai/gpt-4.1">OpenAI GPT-4.1 (1M+ context, long-context reasoning)</option>
+            <option value="anthropic/claude-3.5-sonnet">Anthropic Claude 3.5 Sonnet (200k context, multilingual/agentic)</option>
+            <option value="openai/gpt-4.1-mini">OpenAI GPT-4.1 Mini (1M+ context, efficient coding)</option>
+        </select>
+
+        <label for="english_file">1. Select Original English .txt File</label>
+        <input type="file" id="english_file" accept=".txt">
+
+        <label for="vietnamese_file">2. Select Translated Vietnamese .txt or .docx File</label>
+        <input type="file" id="vietnamese_file" accept=".txt,.docx">
+
+        <button id="verify_button" disabled>Verify Translation</button>
+        <span id="loading" style="display: none;">Loading...</span>
+    </section>
+
+    <section id="problems-section">
+        <h2>Problem Areas</h2>
+        <ul id="problems-list">
+            <!-- Problem markers will be populated here -->
+        </ul>
+    </section>
+
+    <section id="text-display-section">
+        <div class="text-container">
+            <h2>English Text</h2>
+            <div id="english-text-display" class="text-content"></div>
+        </div>
+        <div class="text-container">
+            <h2>Vietnamese Text</h2>
+            <div id="vietnamese-text-display" class="text-content"></div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
