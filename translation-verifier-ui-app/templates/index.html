@@ -24,11 +24,27 @@
             <option value="openai/gpt-4.1-mini">OpenAI GPT-4.1 Mini (1M+ context, efficient coding)</option>
         </select>
 
-        <label for="english_file">1. Select Original English .txt File</label>
-        <input type="file" id="english_file" accept=".txt">
+        <div id="folder-upload-container">
+            <div class="folder-input">
+                <label for="english_folder">1. Upload English folder (.txt files)</label>
+                <input type="file" id="english_folder" webkitdirectory directory multiple accept=".txt">
+            </div>
+            <div class="folder-input">
+                <label for="vietnamese_folder">2. Upload Vietnamese folder (.txt or .docx)</label>
+                <input type="file" id="vietnamese_folder" webkitdirectory directory multiple accept=".txt,.docx">
+            </div>
+        </div>
 
-        <label for="vietnamese_file">2. Select Translated Vietnamese .txt or .docx File</label>
-        <input type="file" id="vietnamese_file" accept=".txt,.docx">
+        <div id="file-pickers">
+            <div class="picker-section">
+                <h3>English Files</h3>
+                <ul id="english-file-list" class="file-list"></ul>
+            </div>
+            <div class="picker-section">
+                <h3>Vietnamese Files</h3>
+                <ul id="vietnamese-file-list" class="file-list"></ul>
+            </div>
+        </div>
 
         <button id="verify_button" disabled>Verify Translation</button>
         <span id="loading" style="display: none;">Loading...</span>
@@ -50,6 +66,16 @@
             <h2>Vietnamese Text</h2>
             <div id="vietnamese-text-display" class="text-content"></div>
         </div>
+    </section>
+
+    <section id="history-section">
+        <h2>History</h2>
+        <div id="history-controls">
+            <button id="clear-history-button">Clear All History</button>
+        </div>
+        <ul id="history-list" class="history-list">
+            <!-- Saved results will appear here -->
+        </ul>
     </section>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>

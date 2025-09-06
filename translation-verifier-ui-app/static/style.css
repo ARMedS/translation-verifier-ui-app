@@ -132,6 +132,62 @@ button:disabled {
     gap: 20px;
 }
 
+#folder-upload-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 12px 0 8px;
+}
+
+.folder-input input[type="file"] {
+    width: 100%;
+}
+
+#file-pickers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.picker-section h3 {
+    margin: 6px 0;
+}
+
+.file-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 220px;
+    overflow-y: auto;
+    background: #fff;
+}
+
+.file-list-item {
+    padding: 8px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f1f1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.file-list-item:hover {
+    background: #f7faff;
+}
+
+.file-list-item.selected {
+    background: #e8f0ff;
+    border-left: 3px solid #007bff;
+}
+
+.file-list-empty {
+    padding: 10px;
+    color: #777;
+}
+
 .text-container h2 {
     text-align: center;
 }
@@ -147,4 +203,49 @@ button:disabled {
 
 .highlight {
     background-color: yellow;
+}
+
+#history-section {
+    margin-top: 24px;
+}
+
+#history-controls {
+    margin-bottom: 8px;
+}
+
+.history-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 220px;
+    overflow-y: auto;
+    background: #fff;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.history-title {
+    font-size: 0.95em;
+    color: #333;
+    margin-right: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.history-actions button {
+    margin-left: 8px;
+}
+
+.history-empty {
+    padding: 12px;
+    color: #777;
 }
